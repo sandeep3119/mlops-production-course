@@ -1,6 +1,7 @@
 import logging
 import json
 
+
 class JSONFormatter(logging.Formatter):
     def format(self, record):
         log_data = {
@@ -11,5 +12,3 @@ class JSONFormatter(logging.Formatter):
         if hasattr(record, "extra"):
             log_data.update(record.extra)
         return json.dumps(log_data)
-    
-    

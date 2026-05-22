@@ -9,11 +9,12 @@ MODEL_CACHE = os.getenv("MODEL_CACHE", "models/")
 model = None
 model_ready = False
 
+
 def load_model():
     global model, model_ready
     model = SentenceTransformer(MODEL_NAME, cache_folder=MODEL_CACHE)
     model_ready = True
 
+
 def embed_text(text: str):
     return model.encode(text)
-
