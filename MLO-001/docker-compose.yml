@@ -1,0 +1,11 @@
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONPATH=/mlo-001
+      - MODEL_NAME=all-MiniLM-L6-v2
+      - MODEL_CACHE=/mlo-001/app/models
+    volumes:
+      - ./models:/app/models

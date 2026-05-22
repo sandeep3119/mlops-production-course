@@ -1,0 +1,12 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# Caches and model weights
+models/
+
+# Environment variables
+.env
+
+# VSCode
+.vscode/

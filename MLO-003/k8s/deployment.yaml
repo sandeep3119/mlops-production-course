@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mlo-embed
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: mlo-embed
+  template:
+    metadata:
+      labels:
+        app: mlo-embed
+    spec:
+      containers:
+      - name: mlo-embed
+        image: sandeep3119/mlo-embed:v1
+        imagePullPolicy: Always
+        volumeMounts:
+        - name: model-cache
+          mountPath: /app/models
+        ports:
+        - containerPort: 8000
+        envFrom:
+        - configMapRef:
+            name: mlo-embed-config
+        resources:
+          requests:
+            memory: "640Mi"
+            cpu: "300m"
+          limits:
+            memory: "850Mi"
+            cpu: "1000m"
+        livenessProbe:
+          httpGet:
+            path: /health/live
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health/ready
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 5
+      volumes:
+      - name: model-cache
+        emptyDir: {}
