@@ -10,8 +10,10 @@ COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Download model at build time
-RUN python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('all-MiniLM-L6-v2', cache_folder='/mlo-001/app/models')"
-
+ARG DOWNLOAD_MODEL=true
+RUN if [ "$DOWNLOAD_MODEL" = "true" ]; then \
+    python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('all-MiniLM-L6-v2', cache_folder='/app/models')"; \
+    fi
 # Expose port
 EXPOSE 8000
 

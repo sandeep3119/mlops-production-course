@@ -6,14 +6,18 @@ from sentence_transformers import SentenceTransformer
 
 app = FastAPI()
 
+
 class TextRequest(BaseModel):
     text: str
+
 
 class EmbeddingResponse(BaseModel):
     embedding: List[float]
 
+
 # Load model at startup (not per request)
 model = SentenceTransformer("all-MiniLM-L6-v2")
+
 
 @app.post("/embed", response_model=EmbeddingResponse)
 def embed_text(request: TextRequest):
