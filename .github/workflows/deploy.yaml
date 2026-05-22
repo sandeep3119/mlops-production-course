@@ -38,12 +38,15 @@ jobs:
       
       - name: Run tests
         run: |
-          pytest MLO-004/tests/
+          cd MLO-004
+          pytest tests/
       
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/mlo-embed:${{ github.run_number }} MLO-004/
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/mlo-embed:latest MLO-004/
+          docker build --build-arg DOWNLOAD_MODEL=false \
+            -t ${{ secrets.DOCKERHUB_USERNAME }}/mlo-embed:${{ github.run_number }} \
+            -t ${{ secrets.DOCKERHUB_USERNAME }}/mlo-embed:latest \
+            MLO-004/
       - name: Push Docker image
         run: |
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/mlo-embed:${{ github.run_number }}
