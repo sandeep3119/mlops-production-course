@@ -1,1 +1,10 @@
 /models
+__pycache__/
+*.pyc
+.pytest_cache/
+.DS_Store
+venv/
+*.egg-info/
+.env
+.vscode/
+*.log
