@@ -3,7 +3,7 @@ from time import time
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import List
-from . import model
+from app import model
 import logging
 import asyncio
 from .utility.logger import JSONFormatter

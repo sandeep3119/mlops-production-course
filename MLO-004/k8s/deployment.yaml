@@ -15,11 +15,8 @@ spec:
     spec:
       containers:
       - name: mlo-embed
-        image: sandeep3119/mlo-embed:latest
+        image: sandeep3119/mlo-embed:4
         imagePullPolicy: Always
-        volumeMounts:
-        - name: model-cache
-          mountPath: /app/models
         ports:
         - containerPort: 8000
         envFrom:
@@ -44,6 +41,3 @@ spec:
             port: 8000
           initialDelaySeconds: 30
           periodSeconds: 5
-      volumes:
-      - name: model-cache
-        emptyDir: {}

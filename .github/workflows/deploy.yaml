@@ -44,12 +44,12 @@ jobs:
       - name: Build Docker image
         run: |
           docker build --build-arg DOWNLOAD_MODEL=false \
-            -t ${{ secrets.DOCKERHUB_USERNAME }}/mlo-embed:${{ github.run_number }} \
+            -t ${{ secrets.DOCKERHUB_USERNAME }}/mlo-embed:v${{ github.run_number }} \
             -t ${{ secrets.DOCKERHUB_USERNAME }}/mlo-embed:latest \
             MLO-004/
       - name: Push Docker image
         run: |
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/mlo-embed:${{ github.run_number }}
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/mlo-embed:v${{ github.run_number }}
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/mlo-embed:latest
   deploy:
     needs: build-and-test
