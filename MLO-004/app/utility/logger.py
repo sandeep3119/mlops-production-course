@@ -7,7 +7,7 @@ class JSONFormatter(logging.Formatter):
         log_data = {
             "timestamp": self.formatTime(record),
             "level": record.levelname,
-            "message: record.getMessage()
+            "message": record.getMessage()
         }
         # merge any extra fields passed in
         if hasattr(record, "extra"):
