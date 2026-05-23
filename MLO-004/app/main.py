@@ -36,7 +36,7 @@ class EmbeddingResponse(BaseModel):
 async def embed_endpoint(request: TextRequest):
     start = time()
     logger.info(
-        "Embedding request received.",
+        msg="Embedding request received.",
         extra={"extra": {"text_length": len(request.text)}},
     )
     if model.model_ready is False:
@@ -49,7 +49,7 @@ async def embed_endpoint(request: TextRequest):
     )
     latency_ms = round((time() - start) * 1000)
     logger.info(
-        "Embedding completed.", extra={"extra": {"latency_ms": latency_ms}}
+        msg="Embedding completed.", extra={"extra": {"latency_ms": latency_ms}}
     )
 
     return {"embedding": embedding.tolist()}
@@ -57,14 +57,14 @@ async def embed_endpoint(request: TextRequest):
 
 @app.get("/health/live", status_code=200)
 async def health_check():
-    logger.info("Liveness check requested.")
+    logger.info(msg="Liveness check requested.")
     return {"status": "alive"}
 
 
 @app.get("/health/ready", status_code=200)
 async def readiness_check():
     if not model.model_ready:
-        logger.error("Model not loaded. Readiness check failed.")
+        logger.error(msg="Model not loaded. Readiness check failed.")
         raise HTTPException(status_code=503, detail="Model not loaded.")
-    logger.info("Readiness check requested.")
+    logger.info(msg="Readiness check requested.")
     return {"status": "ready"}

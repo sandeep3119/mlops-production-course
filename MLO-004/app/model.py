@@ -12,7 +12,7 @@ model_ready = False
 
 def load_model():
     global model, model_ready
-    model = SentenceTransformer(MODEL_NAME, cache_folder=MODEL_CACHE)
+    model = SentenceTransformer(MODEL_NAME, cache_folder=MODEL_CACHE, local_files_only=True)
     model_ready = True
 
 
