@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: mlo-embed
-        image: sandeep3119/mlo-embed:4
+        image: sandeep3119/mlo-embed:v5
         imagePullPolicy: Always
         ports:
         - containerPort: 8000
