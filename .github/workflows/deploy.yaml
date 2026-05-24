@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'MLO-004/**'
+      - 'MLO-005/**'
       - '.github/workflows/deploy.yaml'
 
 jobs:
@@ -29,16 +29,16 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r MLO-004/requirements.txt
+          pip install -r MLO-005/requirements.txt
 
       - name: Run linting
         run: |
           pip install flake8
-          flake8 MLO-004/app/
+          flake8 MLO-005/app/
       
       - name: Run tests
         run: |
-          cd MLO-004
+          cd MLO-005
           pytest tests/
       
       - name: Build Docker image
@@ -46,7 +46,7 @@ jobs:
           docker build --build-arg DOWNLOAD_MODEL=true \
             -t ${{ secrets.DOCKERHUB_USERNAME }}/mlo-embed:v${{ github.run_number }} \
             -t ${{ secrets.DOCKERHUB_USERNAME }}/mlo-embed:latest \
-            MLO-004/
+            MLO-005/
       - name: Push Docker image
         run: |
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/mlo-embed:v${{ github.run_number }}
