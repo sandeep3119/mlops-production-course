@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mlo-embed
+  namespace: default
+  labels:
+    app: mlo-embed
+spec:
+  type: ClusterIP
+  selector:
+    app: mlo-embed
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8000
+    protocol: TCP
